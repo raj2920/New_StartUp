@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EnterpriseHub - Unified Business Management Platform</title>
+    <title>Gate Rank Predictor 2026 - Business Management Suite</title>
     <style>
         * {
             margin: 0;
@@ -12,29 +12,31 @@
         }
 
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #7c3aed;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --dark: #1e293b;
-            --light: #f8fafc;
-            --gray: #94a3b8;
+            --primary: #e67e22;
+            --primary-dark: #d35400;
+            --secondary: #3498db;
+            --success: #27ae60;
+            --warning: #f1c40f;
+            --danger: #e74c3c;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --gray: #95a5a6;
+            --orange-light: #fdf2e9;
+            --blue-light: #e8f0fe;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f6fa;
         }
 
-        /* Login Page Styles */
+        /* Login Page */
         #login-page {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 20px;
         }
 
@@ -44,45 +46,89 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             overflow: hidden;
             width: 100%;
-            max-width: 1000px;
+            max-width: 1100px;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.2fr 0.8fr;
         }
 
         .login-left {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 40px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 50px;
             color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-left::before {
+            content: "GATE 2026";
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            font-size: 120px;
+            font-weight: bold;
+            opacity: 0.1;
+            color: white;
         }
 
         .login-left h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 20px;
+            position: relative;
         }
 
-        .login-left p {
-            font-size: 1.1rem;
+        .login-left .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
             opacity: 0.9;
-            line-height: 1.6;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .feature-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            background: rgba(255,255,255,0.2);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
         }
 
         .login-right {
-            padding: 40px;
+            padding: 50px;
             background: white;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h2 {
+            color: var(--dark);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: var(--gray);
         }
 
         .login-form {
             max-width: 350px;
             margin: 0 auto;
-        }
-
-        .login-form h2 {
-            color: var(--dark);
-            margin-bottom: 30px;
-            font-size: 1.8rem;
         }
 
         .form-group {
@@ -99,8 +145,8 @@
         .form-group input {
             width: 100%;
             padding: 12px 15px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
             font-size: 1rem;
             transition: all 0.3s;
         }
@@ -113,10 +159,10 @@
         .login-btn {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
@@ -127,10 +173,22 @@
             transform: translateY(-2px);
         }
 
-        /* Dashboard Styles */
+        .demo-credentials {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .demo-credentials p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Dashboard */
         #dashboard-page {
             display: none;
-            min-height: 100vh;
         }
 
         .dashboard-container {
@@ -141,45 +199,65 @@
 
         /* Sidebar */
         .sidebar {
-            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+            background: linear-gradient(180deg, #2c3e50 0%, #1a2634 100%);
             color: white;
-            padding: 30px 20px;
             position: fixed;
             width: 280px;
             height: 100vh;
             overflow-y: auto;
+            padding: 30px 20px;
         }
 
         .sidebar-header {
             text-align: center;
-            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 20px;
         }
 
-        .sidebar-header h2 {
+        .logo {
             font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 5px;
         }
 
-        .sidebar-header p {
+        .logo-small {
             color: var(--gray);
             font-size: 0.9rem;
         }
 
-        .business-selector {
+        .profile-card {
             background: rgba(255,255,255,0.1);
             border-radius: 10px;
             padding: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+            text-align: center;
         }
 
-        .business-selector select {
-            width: 100%;
-            padding: 10px;
-            border-radius: 8px;
-            background: var(--dark);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.2);
-            margin-top: 10px;
+        .profile-image {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .profile-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .profile-role {
+            color: var(--gray);
+            font-size: 0.8rem;
         }
 
         .nav-menu {
@@ -196,8 +274,9 @@
             padding: 12px 15px;
             color: var(--gray);
             text-decoration: none;
-            border-radius: 10px;
+            border-radius: 8px;
             transition: all 0.3s;
+            cursor: pointer;
         }
 
         .nav-link:hover, .nav-link.active {
@@ -207,82 +286,130 @@
 
         .nav-link i {
             margin-right: 10px;
-            width: 20px;
+            width: 24px;
+            font-style: normal;
+        }
+
+        .badge {
+            background: var(--danger);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            margin-left: auto;
         }
 
         /* Main Content */
         .main-content {
             margin-left: 280px;
             padding: 30px;
-            background: #f1f5f9;
+            background: #f5f6fa;
         }
 
-        .header {
+        .top-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        .header-title h1 {
+        .page-title h1 {
             color: var(--dark);
             font-size: 1.8rem;
         }
 
-        .header-actions {
+        .page-title p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .top-actions {
             display: flex;
             gap: 15px;
             align-items: center;
         }
 
-        .notification-badge {
-            background: var(--danger);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-        }
-
-        .user-profile {
+        .search-box {
             display: flex;
             align-items: center;
-            gap: 10px;
+            background: #f5f6fa;
+            border-radius: 8px;
+            padding: 8px 15px;
+        }
+
+        .search-box input {
+            border: none;
+            background: none;
+            padding: 5px;
+            width: 200px;
+        }
+
+        .search-box input:focus {
+            outline: none;
+        }
+
+        .notification-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .user-avatar {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: bold;
+            cursor: pointer;
         }
 
-        /* Dashboard Cards */
+        /* Stats Cards */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            gap: 25px;
             margin-bottom: 30px;
         }
 
         .stat-card {
             background: white;
-            padding: 25px;
             border-radius: 15px;
+            padding: 25px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             transition: transform 0.3s;
         }
 
         .stat-card:hover {
             transform: translateY(-5px);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
         }
 
         .stat-icon {
@@ -292,14 +419,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 15px;
             font-size: 1.5rem;
         }
 
-        .stat-card:nth-child(1) .stat-icon { background: #fee2e2; color: var(--danger); }
-        .stat-card:nth-child(2) .stat-icon { background: #dbeafe; color: var(--primary); }
-        .stat-card:nth-child(3) .stat-icon { background: #dcfce7; color: var(--success); }
-        .stat-card:nth-child(4) .stat-icon { background: #fff3cd; color: var(--warning); }
+        .stat-icon.orange { background: var(--orange-light); color: var(--primary); }
+        .stat-icon.blue { background: var(--blue-light); color: var(--secondary); }
+        .stat-icon.green { background: #e8f5e9; color: var(--success); }
+        .stat-icon.purple { background: #f3e5f5; color: #9b59b6; }
 
         .stat-value {
             font-size: 2rem;
@@ -313,30 +439,51 @@
             font-size: 0.9rem;
         }
 
-        /* Charts Section */
+        .trend {
+            font-size: 0.8rem;
+            padding: 3px 8px;
+            border-radius: 12px;
+        }
+
+        .trend.up { background: #e8f5e9; color: var(--success); }
+        .trend.down { background: #ffebee; color: var(--danger); }
+
+        /* Charts Grid */
         .charts-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 20px;
+            gap: 25px;
             margin-bottom: 30px;
         }
 
         .chart-card {
             background: white;
-            padding: 20px;
             border-radius: 15px;
+            padding: 25px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        .chart-card h3 {
-            color: var(--dark);
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 20px;
+        }
+
+        .chart-header h3 {
+            color: var(--dark);
+        }
+
+        .chart-actions select {
+            padding: 5px 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
         }
 
         .chart-placeholder {
             height: 300px;
-            background: linear-gradient(45deg, #f1f5f9 25%, transparent 25%),
-                        linear-gradient(-45deg, #f1f5f9 25%, transparent 25%);
+            background: linear-gradient(45deg, #f5f6fa 25%, transparent 25%),
+                        linear-gradient(-45deg, #f5f6fa 25%, transparent 25%);
             background-size: 20px 20px;
             border-radius: 10px;
             display: flex;
@@ -345,18 +492,29 @@
             color: var(--gray);
         }
 
-        /* Recent Activity */
-        .activity-list {
+        /* Recent Activity & Quick Actions */
+        .bottom-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 25px;
+        }
+
+        .activity-card {
             background: white;
             border-radius: 15px;
-            padding: 20px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .activity-list {
+            margin-top: 20px;
         }
 
         .activity-item {
             display: flex;
             align-items: center;
             padding: 15px 0;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid #f0f0f0;
         }
 
         .activity-item:last-child {
@@ -370,126 +528,113 @@
             margin-right: 15px;
         }
 
-        .activity-dot.success { background: var(--success); }
-        .activity-dot.warning { background: var(--warning); }
-        .activity-dot.danger { background: var(--danger); }
+        .activity-dot.new { background: var(--success); }
+        .activity-dot.pending { background: var(--warning); }
+        .activity-dot.alert { background: var(--danger); }
 
         .activity-content {
             flex: 1;
         }
 
         .activity-title {
-            color: var(--dark);
             font-weight: 500;
-            margin-bottom: 5px;
+            color: var(--dark);
+            margin-bottom: 3px;
         }
 
         .activity-time {
-            color: var(--gray);
             font-size: 0.8rem;
+            color: var(--gray);
         }
 
-        /* Business Modules Grid */
-        .modules-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .module-card {
+        .quick-actions-card {
             background: white;
             border-radius: 15px;
             padding: 25px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid transparent;
         }
 
-        .module-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-        }
-
-        .module-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            color: white;
-        }
-
-        .module-title {
-            font-size: 1.3rem;
-            color: var(--dark);
-            margin-bottom: 10px;
-        }
-
-        .module-description {
-            color: var(--gray);
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-        }
-
-        .module-stats {
-            display: flex;
-            justify-content: space-between;
-            color: var(--dark);
-            font-size: 0.9rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .dashboard-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .sidebar {
-                display: none;
-            }
-            
-            .main-content {
-                margin-left: 0;
-            }
-            
-            .login-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .charts-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Quick Actions */
-        .quick-actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
         }
 
         .action-btn {
-            padding: 10px 20px;
-            background: var(--primary);
-            color: white;
+            background: #f8f9fa;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
+            padding: 20px 10px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
             transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
         }
 
         .action-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .action-btn i {
+            font-size: 1.5rem;
+            font-style: normal;
+        }
+
+        /* Section Styles */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* Students Table */
+        .students-table {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 15px 10px;
+            background: #f8f9fa;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-badge.active { background: #e8f5e9; color: var(--success); }
+        .status-badge.pending { background: #fff3e0; color: var(--warning); }
+        .status-badge.inactive { background: #ffebee; color: var(--danger); }
+
+        .rank-prediction {
+            font-weight: bold;
+            color: var(--primary);
         }
 
         /* Modal */
@@ -534,6 +679,29 @@
             cursor: pointer;
             color: var(--gray);
         }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .bottom-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -541,33 +709,46 @@
     <div id="login-page">
         <div class="login-container">
             <div class="login-left">
-                <h1>EnterpriseHub</h1>
-                <p>Your complete business management solution. Manage all your businesses from one powerful platform with real-time analytics, inventory tracking, financial management, and more.</p>
-                <div style="margin-top: 30px;">
-                    <p style="margin-bottom: 10px;">✓ Multi-business management</p>
-                    <p style="margin-bottom: 10px;">✓ Real-time analytics</p>
-                    <p style="margin-bottom: 10px;">✓ Inventory tracking</p>
-                    <p style="margin-bottom: 10px;">✓ Financial reporting</p>
-                    <p>✓ Team collaboration</p>
+                <h1>Gate Rank Predictor 2026</h1>
+                <div class="subtitle">Powered by Raj</div>
+                <p>India's Most Accurate GATE Rank Prediction Platform</p>
+                
+                <ul class="feature-list">
+                    <li>Real-time rank prediction based on previous year data</li>
+                    <li>Branch-wise analysis & cutoff predictions</li>
+                    <li>Personalized study recommendations</li>
+                    <li>College predictor based on expected rank</li>
+                    <li>Performance analytics & progress tracking</li>
+                    <li>Mock test series with instant rank prediction</li>
+                </ul>
+
+                <div style="margin-top: 40px;">
+                    <p style="font-size: 2rem; font-weight: bold;">10,000+</p>
+                    <p>Happy Students Predicted Their Ranks</p>
                 </div>
             </div>
             <div class="login-right">
-                <div class="login-form">
-                    <h2>Welcome Back</h2>
-                    <form id="loginForm" onsubmit="handleLogin(event)">
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" id="email" value="demo@enterprisehub.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" id="password" value="demo123" required>
-                        </div>
-                        <button type="submit" class="login-btn">Login to Dashboard</button>
-                    </form>
-                    <p style="text-align: center; margin-top: 20px; color: var(--gray);">
-                        Demo credentials pre-filled
-                    </p>
+                <div class="login-header">
+                    <h2>Welcome Back!</h2>
+                    <p>Login to manage your business</p>
+                </div>
+
+                <form class="login-form" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="email" value="raj@gatepredictor.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="password" value="admin123" required>
+                    </div>
+                    <button type="submit" class="login-btn">Access Dashboard</button>
+                </form>
+
+                <div class="demo-credentials">
+                    <p><strong>Demo Credentials:</strong></p>
+                    <p>Email: raj@gatepredictor.com</p>
+                    <p>Password: admin123</p>
                 </div>
             </div>
         </div>
@@ -579,58 +760,60 @@
             <!-- Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-header">
-                    <h2>EnterpriseHub</h2>
-                    <p>Business Management</p>
+                    <div class="logo">GATE Predictor 2026</div>
+                    <div class="logo-small">by Raj</div>
                 </div>
-                
-                <div class="business-selector">
-                    <label>Active Business</label>
-                    <select id="businessSelector" onchange="switchBusiness()">
-                        <option value="techcorp">TechCorp Solutions</option>
-                        <option value="foodies">Foodies Restaurant</option>
-                        <option value="fashion">Fashion Boutique</option>
-                        <option value="consulting">Consulting Group</option>
-                    </select>
+
+                <div class="profile-card">
+                    <div class="profile-image">R</div>
+                    <div class="profile-name">Raj</div>
+                    <div class="profile-role">Founder & CEO</div>
                 </div>
 
                 <ul class="nav-menu">
                     <li class="nav-item">
-                        <a href="#" class="nav-link active" onclick="showSection('dashboard')">
+                        <a class="nav-link active" onclick="showSection('dashboard')">
                             <i>📊</i> Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link" onclick="showSection('inventory')">
-                            <i>📦</i> Inventory
+                        <a class="nav-link" onclick="showSection('students')">
+                            <i>👥</i> Students
+                            <span class="badge">New</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link" onclick="showSection('sales')">
-                            <i>💰</i> Sales & Finance
+                        <a class="nav-link" onclick="showSection('predictions')">
+                            <i>🎯</i> Rank Predictions
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link" onclick="showSection('customers')">
-                            <i>👥</i> Customers
+                        <a class="nav-link" onclick="showSection('mocktests')">
+                            <i>📝</i> Mock Tests
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link" onclick="showSection('employees')">
-                            <i>👤</i> Employees
+                        <a class="nav-link" onclick="showSection('colleges')">
+                            <i>🏛️</i> College Predictor
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link" onclick="showSection('marketing')">
-                            <i>📢</i> Marketing
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" onclick="showSection('analytics')">
+                        <a class="nav-link" onclick="showSection('analytics')">
                             <i>📈</i> Analytics
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link" onclick="showSection('settings')">
+                        <a class="nav-link" onclick="showSection('revenue')">
+                            <i>💰</i> Revenue
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showSection('marketing')">
+                            <i>📢</i> Marketing
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showSection('settings')">
                             <i>⚙️</i> Settings
                         </a>
                     </li>
@@ -639,186 +822,282 @@
 
             <!-- Main Content -->
             <div class="main-content">
-                <div class="header">
-                    <div class="header-title">
-                        <h1 id="dashboardTitle">Dashboard Overview</h1>
-                        <p id="businessName">TechCorp Solutions</p>
+                <div class="top-bar">
+                    <div class="page-title">
+                        <h1 id="pageTitle">Dashboard Overview</h1>
+                        <p id="dateDisplay"></p>
                     </div>
-                    <div class="header-actions">
-                        <div class="quick-actions">
-                            <button class="action-btn" onclick="openModal('addBusiness')">
-                                <span>➕</span> Add Business
-                            </button>
-                            <button class="action-btn" onclick="openModal('newTransaction')">
-                                <span>💳</span> New Transaction
-                            </button>
+                    <div class="top-actions">
+                        <div class="search-box">
+                            <span>🔍</span>
+                            <input type="text" placeholder="Search...">
                         </div>
-                        <div class="notification-badge">3</div>
-                        <div class="user-profile">
-                            <div class="user-avatar">JD</div>
-                            <span>John Doe</span>
+                        <div class="notification-icon">
+                            <span>🔔</span>
+                            <span class="notification-badge">5</span>
                         </div>
+                        <div class="user-avatar" onclick="logout()">R</div>
                     </div>
                 </div>
 
-                <!-- Dynamic Content Sections -->
-                <div id="dashboard-section">
-                    <!-- Stats Cards -->
+                <!-- Dashboard Section -->
+                <div id="dashboard-section" class="section active">
+                    <!-- Stats Grid -->
                     <div class="stats-grid">
                         <div class="stat-card">
-                            <div class="stat-icon">💰</div>
-                            <div class="stat-value" id="totalRevenue">$124,562</div>
-                            <div class="stat-label">Total Revenue</div>
-                            <small style="color: var(--success);">↑ 12.5% from last month</small>
+                            <div class="stat-header">
+                                <div class="stat-icon orange">👥</div>
+                                <span class="trend up">↑ 12%</span>
+                            </div>
+                            <div class="stat-value">2,847</div>
+                            <div class="stat-label">Total Students</div>
+                            <small>Active users: 1,234</small>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-icon">📦</div>
-                            <div class="stat-value" id="totalOrders">1,456</div>
-                            <div class="stat-label">Total Orders</div>
-                            <small style="color: var(--success);">↑ 8.2% from last month</small>
+                            <div class="stat-header">
+                                <div class="stat-icon blue">🎯</div>
+                                <span class="trend up">↑ 8%</span>
+                            </div>
+                            <div class="stat-value">15,342</div>
+                            <div class="stat-label">Predictions Made</div>
+                            <small>This month: 2,456</small>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-icon">👥</div>
-                            <div class="stat-value" id="totalCustomers">892</div>
-                            <div class="stat-label">Active Customers</div>
-                            <small style="color: var(--success);">↑ 15.3% from last month</small>
+                            <div class="stat-header">
+                                <div class="stat-icon green">📝</div>
+                                <span class="trend up">↑ 25%</span>
+                            </div>
+                            <div class="stat-value">4,567</div>
+                            <div class="stat-label">Mock Tests Taken</div>
+                            <small>Avg score: 62%</small>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-icon">⭐</div>
-                            <div class="stat-value" id="avgRating">4.8</div>
-                            <div class="stat-label">Average Rating</div>
-                            <small style="color: var(--success);">↑ 0.3 from last month</small>
+                            <div class="stat-header">
+                                <div class="stat-icon purple">💰</div>
+                                <span class="trend up">↑ 18%</span>
+                            </div>
+                            <div class="stat-value">₹8,45,000</div>
+                            <div class="stat-label">Revenue (MTD)</div>
+                            <small>Target: ₹10,00,000</small>
                         </div>
                     </div>
 
                     <!-- Charts -->
                     <div class="charts-grid">
                         <div class="chart-card">
-                            <h3>Revenue Overview</h3>
+                            <div class="chart-header">
+                                <h3>Student Registrations</h3>
+                                <div class="chart-actions">
+                                    <select>
+                                        <option>Last 7 days</option>
+                                        <option>Last 30 days</option>
+                                        <option>Last 3 months</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="chart-placeholder">
-                                [Revenue Chart - Last 30 Days]
+                                [Student Growth Chart - +45% this month]
                             </div>
                         </div>
                         <div class="chart-card">
-                            <h3>Sales by Category</h3>
+                            <div class="chart-header">
+                                <h3>Branch-wise Distribution</h3>
+                            </div>
                             <div class="chart-placeholder">
-                                [Pie Chart - Category Distribution]
+                                <div style="text-align: left; padding: 20px;">
+                                    <p>🏭 Mechanical: 35%</p>
+                                    <p>💻 CSE: 28%</p>
+                                    <p>⚡ Electrical: 22%</p>
+                                    <p>📡 Electronics: 15%</p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Business Modules -->
-                    <div class="modules-grid">
-                        <div class="module-card" onclick="openModule('inventory')">
-                            <div class="module-icon">📦</div>
-                            <div class="module-title">Inventory Management</div>
-                            <div class="module-description">Track stock levels, manage suppliers, and automate reordering</div>
-                            <div class="module-stats">
-                                <span>Low Stock: 12 items</span>
-                                <span>→</span>
+                    <!-- Bottom Grid -->
+                    <div class="bottom-grid">
+                        <!-- Recent Activity -->
+                        <div class="activity-card">
+                            <h3>Recent Student Activity</h3>
+                            <div class="activity-list">
+                                <div class="activity-item">
+                                    <div class="activity-dot new"></div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">Amit Kumar predicted GATE Rank #245</div>
+                                        <div class="activity-time">5 minutes ago - CSE Branch</div>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-dot new"></div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">Priya Singh completed Mock Test #12</div>
+                                        <div class="activity-time">15 minutes ago - Score: 78%</div>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-dot pending"></div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">New registration: Rahul Verma - ME</div>
+                                        <div class="activity-time">1 hour ago - Payment pending</div>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-dot alert"></div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">System alert: Server load high</div>
+                                        <div class="activity-time">2 hours ago</div>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-dot new"></div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">College predictor used by 50+ students</div>
+                                        <div class="activity-time">3 hours ago</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="module-card" onclick="openModule('finance')">
-                            <div class="module-icon">💰</div>
-                            <div class="module-title">Financial Dashboard</div>
-                            <div class="module-description">Monitor cash flow, expenses, and generate financial reports</div>
-                            <div class="module-stats">
-                                <span>Net Profit: $45,231</span>
-                                <span>→</span>
-                            </div>
-                        </div>
-                        <div class="module-card" onclick="openModule('crm')">
-                            <div class="module-icon">👥</div>
-                            <div class="module-title">Customer Relations</div>
-                            <div class="module-description">Manage customer data, track interactions, and improve retention</div>
-                            <div class="module-stats">
-                                <span>Active: 892 customers</span>
-                                <span>→</span>
-                            </div>
-                        </div>
-                        <div class="module-card" onclick="openModule('hr')">
-                            <div class="module-icon">👤</div>
-                            <div class="module-title">HR Management</div>
-                            <div class="module-description">Employee records, payroll, attendance, and performance tracking</div>
-                            <div class="module-stats">
-                                <span>24 Employees</span>
-                                <span>→</span>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Recent Activity -->
-                    <div style="margin-top: 30px;">
-                        <h3 style="margin-bottom: 20px;">Recent Activity</h3>
-                        <div class="activity-list">
-                            <div class="activity-item">
-                                <div class="activity-dot success"></div>
-                                <div class="activity-content">
-                                    <div class="activity-title">New order received from Acme Corp</div>
-                                    <div class="activity-time">5 minutes ago</div>
-                                </div>
-                                <span>$1,245</span>
-                            </div>
-                            <div class="activity-item">
-                                <div class="activity-dot warning"></div>
-                                <div class="activity-content">
-                                    <div class="activity-title">Inventory alert: Product XYZ running low</div>
-                                    <div class="activity-time">15 minutes ago</div>
-                                </div>
-                            </div>
-                            <div class="activity-item">
-                                <div class="activity-dot success"></div>
-                                <div class="activity-content">
-                                    <div class="activity-title">New customer registration: Sarah Johnson</div>
-                                    <div class="activity-time">1 hour ago</div>
-                                </div>
-                            </div>
-                            <div class="activity-item">
-                                <div class="activity-dot danger"></div>
-                                <div class="activity-content">
-                                    <div class="activity-title">Payment failed for subscription</div>
-                                    <div class="activity-time">2 hours ago</div>
-                                </div>
+                        <!-- Quick Actions -->
+                        <div class="quick-actions-card">
+                            <h3>Quick Actions</h3>
+                            <div class="actions-grid">
+                                <button class="action-btn" onclick="openModal('addStudent')">
+                                    <i>➕</i>
+                                    <span>Add Student</span>
+                                </button>
+                                <button class="action-btn" onclick="openModal('newTest')">
+                                    <i>📝</i>
+                                    <span>New Mock Test</span>
+                                </button>
+                                <button class="action-btn" onclick="updatePredictions()">
+                                    <i>🔄</i>
+                                    <span>Update Predictions</span>
+                                </button>
+                                <button class="action-btn" onclick="generateReport()">
+                                    <i>📊</i>
+                                    <span>Generate Report</span>
+                                </button>
+                                <button class="action-btn" onclick="sendNotification()">
+                                    <i>📢</i>
+                                    <span>Send Notification</span>
+                                </button>
+                                <button class="action-btn" onclick="viewAnalytics()">
+                                    <i>📈</i>
+                                    <span>View Analytics</span>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Placeholder for other sections -->
-                <div id="inventory-section" style="display: none;">
-                    <h2>Inventory Management</h2>
-                    <!-- Add inventory management content here -->
+                <!-- Students Section -->
+                <div id="students-section" class="section">
+                    <div class="students-table">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <h2>Student Management</h2>
+                            <button class="login-btn" style="width: auto;" onclick="openModal('addStudent')">+ Add New Student</button>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Student ID</th>
+                                    <th>Name</th>
+                                    <th>Branch</th>
+                                    <th>Expected Rank</th>
+                                    <th>Tests Taken</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>GATE001</td>
+                                    <td>Amit Kumar</td>
+                                    <td>CSE</td>
+                                    <td class="rank-prediction">#245</td>
+                                    <td>12</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>👁️ ✏️ 🗑️</td>
+                                </tr>
+                                <tr>
+                                    <td>GATE002</td>
+                                    <td>Priya Singh</td>
+                                    <td>ECE</td>
+                                    <td class="rank-prediction">#567</td>
+                                    <td>8</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>👁️ ✏️ 🗑️</td>
+                                </tr>
+                                <tr>
+                                    <td>GATE003</td>
+                                    <td>Rahul Verma</td>
+                                    <td>ME</td>
+                                    <td class="rank-prediction">#892</td>
+                                    <td>5</td>
+                                    <td><span class="status-badge pending">Pending</span></td>
+                                    <td>👁️ ✏️ 🗑️</td>
+                                </tr>
+                                <tr>
+                                    <td>GATE004</td>
+                                    <td>Neha Gupta</td>
+                                    <td>EE</td>
+                                    <td class="rank-prediction">#423</td>
+                                    <td>15</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>👁️ ✏️ 🗑️</td>
+                                </tr>
+                                <tr>
+                                    <td>GATE005</td>
+                                    <td>Vikram Patel</td>
+                                    <td>CSE</td>
+                                    <td class="rank-prediction">#156</td>
+                                    <td>10</td>
+                                    <td><span class="status-badge inactive">Inactive</span></td>
+                                    <td>👁️ ✏️ 🗑️</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                
-                <div id="sales-section" style="display: none;">
-                    <h2>Sales & Finance</h2>
-                    <!-- Add sales content here -->
+
+                <!-- Predictions Section -->
+                <div id="predictions-section" class="section">
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <h3>Rank Distribution</h3>
+                            <div class="chart-placeholder">
+                                [Rank Distribution Chart]
+                            </div>
+                        </div>
+                        <div class="chart-card">
+                            <h3>Branch-wise Cutoffs</h3>
+                            <div class="chart-placeholder">
+                                <div style="padding: 20px;">
+                                    <p>CSE: 650-700</p>
+                                    <p>ECE: 600-650</p>
+                                    <p>ME: 550-600</p>
+                                    <p>EE: 580-630</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal for Add Business -->
-    <div id="addBusinessModal" class="modal">
+    <!-- Modals -->
+    <div id="addStudentModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Add New Business</h2>
-                <button class="modal-close" onclick="closeModal('addBusiness')">&times;</button>
+                <h2>Add New Student</h2>
+                <button class="modal-close" onclick="closeModal('addStudent')">&times;</button>
             </div>
-            <form onsubmit="addNewBusiness(event)">
+            <form onsubmit="addStudent(event)">
                 <div class="form-group">
-                    <label>Business Name</label>
+                    <label>Full Name</label>
                     <input type="text" required>
-                </div>
-                <div class="form-group">
-                    <label>Business Type</label>
-                    <select required>
-                        <option>Retail</option>
-                        <option>Service</option>
-                        <option>Manufacturing</option>
-                        <option>Technology</option>
-                        <option>Food & Beverage</option>
-                    </select>
                 </div>
                 <div class="form-group">
                     <label>Email</label>
@@ -829,91 +1108,74 @@
                     <input type="tel" required>
                 </div>
                 <div class="form-group">
-                    <label>Address</label>
-                    <textarea rows="3" required></textarea>
+                    <label>Branch</label>
+                    <select required>
+                        <option>Computer Science (CSE)</option>
+                        <option>Electronics (ECE)</option>
+                        <option>Mechanical (ME)</option>
+                        <option>Electrical (EE)</option>
+                        <option>Civil (CE)</option>
+                    </select>
                 </div>
-                <button type="submit" class="login-btn">Add Business</button>
+                <div class="form-group">
+                    <label>GATE Exam Year</label>
+                    <select required>
+                        <option>2026</option>
+                        <option>2025</option>
+                        <option>2024</option>
+                    </select>
+                </div>
+                <button type="submit" class="login-btn">Add Student</button>
             </form>
         </div>
     </div>
 
     <script>
-        // Business data
-        const businessData = {
-            techcorp: {
-                name: 'TechCorp Solutions',
-                revenue: '$124,562',
-                orders: '1,456',
-                customers: '892',
-                rating: '4.8'
-            },
-            foodies: {
-                name: 'Foodies Restaurant',
-                revenue: '$45,231',
-                orders: '2,345',
-                customers: '567',
-                rating: '4.5'
-            },
-            fashion: {
-                name: 'Fashion Boutique',
-                revenue: '$67,892',
-                orders: '892',
-                customers: '423',
-                rating: '4.7'
-            },
-            consulting: {
-                name: 'Consulting Group',
-                revenue: '$89,234',
-                orders: '234',
-                customers: '89',
-                rating: '4.9'
-            }
-        };
-
-        // Handle login
+        // Handle Login
         function handleLogin(event) {
             event.preventDefault();
             document.getElementById('login-page').style.display = 'none';
             document.getElementById('dashboard-page').style.display = 'block';
-            updateBusinessData('techcorp');
+            updateDate();
         }
 
-        // Switch business
-        function switchBusiness() {
-            const selector = document.getElementById('businessSelector');
-            const businessId = selector.value;
-            updateBusinessData(businessId);
+        // Logout
+        function logout() {
+            document.getElementById('login-page').style.display = 'flex';
+            document.getElementById('dashboard-page').style.display = 'none';
         }
 
-        // Update business data
-        function updateBusinessData(businessId) {
-            const data = businessData[businessId];
-            document.getElementById('businessName').textContent = data.name;
-            document.getElementById('totalRevenue').textContent = data.revenue;
-            document.getElementById('totalOrders').textContent = data.orders;
-            document.getElementById('totalCustomers').textContent = data.customers;
-            document.getElementById('avgRating').textContent = data.rating;
+        // Update Date
+        function updateDate() {
+            const date = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('dateDisplay').innerHTML = date.toLocaleDateString('en-US', options);
         }
 
-        // Show different sections
+        // Show Different Sections
         function showSection(section) {
             // Hide all sections
-            document.getElementById('dashboard-section').style.display = 'none';
-            document.getElementById('inventory-section').style.display = 'none';
-            document.getElementById('sales-section').style.display = 'none';
-            
+            document.querySelectorAll('.section').forEach(s => {
+                s.classList.remove('active');
+            });
+
             // Show selected section
-            if (section === 'dashboard') {
-                document.getElementById('dashboard-section').style.display = 'block';
-                document.getElementById('dashboardTitle').textContent = 'Dashboard Overview';
-            } else if (section === 'inventory') {
-                document.getElementById('inventory-section').style.display = 'block';
-                document.getElementById('dashboardTitle').textContent = 'Inventory Management';
-            } else if (section === 'sales') {
-                document.getElementById('sales-section').style.display = 'block';
-                document.getElementById('dashboardTitle').textContent = 'Sales & Finance';
-            }
-            
+            document.getElementById(section + '-section').classList.add('active');
+
+            // Update page title
+            const titles = {
+                'dashboard': 'Dashboard Overview',
+                'students': 'Student Management',
+                'predictions': 'Rank Predictions',
+                'mocktests': 'Mock Tests',
+                'colleges': 'College Predictor',
+                'analytics': 'Analytics',
+                'revenue': 'Revenue',
+                'marketing': 'Marketing',
+                'settings': 'Settings'
+            };
+            document.getElementById('pageTitle').textContent = titles[section];
+
             // Update active nav link
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
@@ -921,36 +1183,47 @@
             event.target.classList.add('active');
         }
 
-        // Open module
-        function openModule(module) {
-            alert(`Opening ${module} module - Full functionality coming soon!`);
-        }
-
-        // Modal functions
+        // Modal Functions
         function openModal(type) {
-            if (type === 'addBusiness') {
-                document.getElementById('addBusinessModal').classList.add('active');
-            } else if (type === 'newTransaction') {
-                alert('New transaction form coming soon!');
+            if (type === 'addStudent') {
+                document.getElementById('addStudentModal').classList.add('active');
+            } else if (type === 'newTest') {
+                alert('Create new mock test form will open here');
             }
         }
 
         function closeModal(type) {
-            if (type === 'addBusiness') {
-                document.getElementById('addBusinessModal').classList.remove('active');
+            if (type === 'addStudent') {
+                document.getElementById('addStudentModal').classList.remove('active');
             }
         }
 
-        // Add new business
-        function addNewBusiness(event) {
+        // Add Student
+        function addStudent(event) {
             event.preventDefault();
-            alert('Business added successfully! (Demo mode)');
-            closeModal('addBusiness');
+            alert('Student added successfully! (Demo mode)');
+            closeModal('addStudent');
+        }
+
+        // Quick Action Functions
+        function updatePredictions() {
+            alert('Updating rank predictions based on latest data...');
+        }
+
+        function generateReport() {
+            alert('Generating comprehensive report...');
+        }
+
+        function sendNotification() {
+            alert('Send notification to all students...');
+        }
+
+        function viewAnalytics() {
+            showSection('analytics');
         }
 
         // Initialize
         window.onload = function() {
-            // Check if user is logged in (for demo, show login page)
             document.getElementById('login-page').style.display = 'flex';
             document.getElementById('dashboard-page').style.display = 'none';
         }
