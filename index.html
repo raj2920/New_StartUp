@@ -1,520 +1,661 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jony · 3D resume world</title>
-  <!-- Font Awesome (simple icons) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      font-family: 'Segoe UI', Teleram, 'Helvetica Neue', sans-serif;
-      color: white;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BITTU KUMAR (RAJ) | CSE · GATE 2025 · STET 2025</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            overflow-x: hidden;
+            background: #0a0a16;
+            color: #f0f0f0;
+        }
+        #three-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .content {
+            position: relative;
+            z-index: 10;
+            background: rgba(10, 10, 22, 0.75);
+            backdrop-filter: blur(4px);
+            min-height: 100vh;
+            width: 100%;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8) inset;
+        }
+        .wrapper {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0 2rem 0;
+            border-bottom: 1px solid rgba(100, 200, 255, 0.2);
+            margin-bottom: 2rem;
+        }
+        .logo h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #a0e9ff, #6c8cff, #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(108, 140, 255, 0.4);
+        }
+        .logo .sub {
+            font-size: 0.9rem;
+            color: #8ab4f8;
+            letter-spacing: 1px;
+            margin-top: 6px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .logo .sub span {
+            background: rgba(30, 40, 70, 0.7);
+            padding: 4px 12px;
+            border-radius: 30px;
+            border: 1px solid #3a4a7a;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+        }
+        .nav-links {
+            display: flex;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: #d0d8f0;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            transition: 0.2s;
+            padding: 6px 0;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-links a:hover {
+            color: #a0e9ff;
+            border-bottom-color: #6c8cff;
+        }
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 2rem 0 3rem 0;
+        }
+        .avatar {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #1e2a4a, #0f1425);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            font-weight: 800;
+            color: #a0d0ff;
+            border: 3px solid #5a7ad0;
+            box-shadow: 0 0 40px rgba(90, 122, 208, 0.6);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+        .hero h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff, #c2d4ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+        .hero .tagline {
+            font-size: 1.3rem;
+            color: #b0c4ff;
+            margin: 0.8rem 0 1.8rem 0;
+            font-weight: 300;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+        .tagline i {
+            color: #7f9eff;
+            margin-right: 6px;
+        }
+        .tagline span {
+            background: rgba(45, 60, 100, 0.5);
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 1rem;
+            border: 1px solid #3a5090;
+        }
+        .social-icons {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1rem 0 2rem;
+        }
+        .social-icons a {
+            color: #c0d0ff;
+            font-size: 1.8rem;
+            transition: 0.25s;
+            opacity: 0.85;
+        }
+        .social-icons a:hover {
+            color: #ffffff;
+            transform: translateY(-4px) scale(1.1);
+            opacity: 1;
+            filter: drop-shadow(0 0 12px #6c8cff);
+        }
+        .cta-button {
+            background: linear-gradient(135deg, #2a3f7a, #1c2a4a);
+            border: 1px solid #5f7fd0;
+            color: white;
+            padding: 12px 36px;
+            border-radius: 40px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+            text-decoration: none;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+        }
+        .cta-button i {
+            font-size: 1.2rem;
+        }
+        .cta-button:hover {
+            background: linear-gradient(135deg, #3a53a0, #2a3f7a);
+            border-color: #9bbaff;
+            box-shadow: 0 0 28px rgba(108, 140, 255, 0.5);
+            transform: scale(1.03);
+        }
+        section {
+            margin: 4rem 0;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: #d0e0ff;
+            border-left: 6px solid #6c8cff;
+            padding-left: 20px;
+            text-shadow: 0 0 12px rgba(108, 140, 255, 0.3);
+        }
+        .section-title i {
+            color: #7f9eff;
+            font-size: 1.9rem;
+        }
+        .about-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #d0d8f0;
+            background: rgba(20, 28, 48, 0.6);
+            padding: 2rem;
+            border-radius: 28px;
+            border: 1px solid #2e3d66;
+            backdrop-filter: blur(6px);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+        }
+        .about-text p + p {
+            margin-top: 1.2rem;
+        }
+        .highlight {
+            color: #a0c0ff;
+            font-weight: 600;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .skill-item {
+            background: rgba(25, 35, 60, 0.75);
+            backdrop-filter: blur(5px);
+            padding: 1.6rem 0.8rem;
+            border-radius: 22px;
+            text-align: center;
+            border: 1px solid #31457a;
+            transition: 0.25s;
+            font-weight: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            color: #d8e2ff;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+        }
+        .skill-item i {
+            font-size: 2.2rem;
+            color: #8aacff;
+            transition: 0.2s;
+        }
+        .skill-item:hover {
+            border-color: #7f9eff;
+            background: rgba(38, 52, 90, 0.9);
+            transform: translateY(-6px);
+            box-shadow: 0 14px 28px -8px #1a2a55;
+        }
+        .skill-item:hover i {
+            color: #ffffff;
+            filter: drop-shadow(0 0 10px #6c8cff);
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .project-card {
+            background: rgba(18, 26, 45, 0.8);
+            backdrop-filter: blur(6px);
+            border-radius: 26px;
+            padding: 2rem 1.8rem;
+            border: 1px solid #2d3e6b;
+            transition: 0.3s;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card:hover {
+            border-color: #7f9eff;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 35px -10px #0e1a33;
+        }
+        .project-card i {
+            font-size: 2.4rem;
+            color: #8aacff;
+            margin-bottom: 1.2rem;
+        }
+        .project-card h3 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #eef3ff;
+            margin-bottom: 0.8rem;
+        }
+        .project-card p {
+            color: #b8c6e8;
+            line-height: 1.6;
+            margin-bottom: 1.6rem;
+            flex: 1;
+        }
+        .project-tag {
+            display: inline-block;
+            background: #1e2d50;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #b0c8ff;
+            letter-spacing: 0.5px;
+            border: 1px solid #3a5090;
+            margin-right: 6px;
+            margin-bottom: 6px;
+        }
+        footer {
+            margin-top: 5rem;
+            padding: 2rem 0 0.5rem;
+            text-align: center;
+            border-top: 1px solid rgba(100, 150, 255, 0.2);
+            font-size: 0.95rem;
+            color: #9aacd0;
+        }
+        footer i {
+            color: #ff7b9c;
+            margin: 0 4px;
+        }
 
-    /* --- UI overlay: inspired by wr.png clean layout + Jony intro --- */
-    .ui-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      pointer-events: none; /* allow click-through to canvas, but we enable on child panels */
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      justify-content: space-between;
-      padding: 2rem 3rem;
-      box-sizing: border-box;
-    }
+        /* ===== PHOTO STYLES (ADDED ONLY) ===== */
+        .hero-photo {
+            width: 100%;
+            max-width: 380px;
+            aspect-ratio: 3 / 4;
+            margin-bottom: 1.8rem;
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid #5a7ad0;
+            box-shadow:
+                0 0 40px rgba(90, 122, 208, 0.6),
+                0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            background: linear-gradient(145deg, #1e2a4a, #0f1425);
+        }
+        .hero-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+            transition: transform 0.7s ease;
+        }
+        .hero-photo:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow:
+                0 0 60px rgba(108, 140, 255, 0.8),
+                0 30px 60px -12px rgba(0, 0, 0, 0.9);
+        }
+        .hero-photo:hover img {
+            transform: scale(1.06);
+        }
+        .hero-photo::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            background: linear-gradient(180deg, transparent 60%, rgba(10, 15, 30, 0.6) 100%);
+            pointer-events: none;
+        }
+        @media (max-width: 700px) {
+            .hero-photo {
+                max-width: 300px;
+            }
+        }
+        @media (max-width: 450px) {
+            .hero-photo {
+                max-width: 250px;
+            }
+        }
+        /* ====================================== */
 
-    /* top navigation – exactly "Home Works Services Pages About Blog Contact" + Let's Talk */
-    .nav-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      pointer-events: auto;
-      background: rgba(10, 10, 20, 0.3);
-      backdrop-filter: blur(8px);
-      padding: 0.8rem 2rem;
-      border-radius: 60px;
-      border: 1px solid rgba(255,255,255,0.15);
-      width: fit-content;
-      margin: 0 auto;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2.2rem;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-      color: #fff;
-      text-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    }
-
-    .nav-links span {
-      cursor: default;
-      font-size: 1.1rem;
-      opacity: 0.9;
-      transition: 0.2s;
-    }
-    .nav-links span:hover { opacity: 1; text-shadow: 0 0 10px #7aa6ff; }
-
-    .lets-talk {
-      background: rgba(255,255,255,0.9);
-      color: #0b0b1f;
-      padding: 0.5rem 1.8rem;
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 1rem;
-      margin-left: 2rem;
-      border: none;
-      cursor: default;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
-      transition: 0.2s;
-    }
-    .lets-talk:hover {
-      background: white;
-      transform: scale(1.02);
-    }
-
-    /* left bottom – "Hi There, I Am Jony · Creative Director · View Works" */
-    .hero-section {
-      pointer-events: auto;
-      max-width: 600px;
-      background: rgba(0, 0, 0, 0.25);
-      backdrop-filter: blur(5px);
-      border-radius: 40px;
-      padding: 2rem 2.5rem;
-      border: 1px solid rgba(255,255,255,0.2);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-      margin-bottom: 2rem;
-    }
-
-    .hero-greeting {
-      font-size: 2.8rem;
-      font-weight: 700;
-      line-height: 1.1;
-      text-shadow: 0 4px 15px black;
-    }
-    .hero-greeting small {
-      font-size: 1.3rem;
-      font-weight: 400;
-      display: block;
-      margin-top: 0.2rem;
-      letter-spacing: 2px;
-      color: #e0e0ff;
-    }
-    .hero-title {
-      font-size: 1.7rem;
-      font-weight: 300;
-      margin: 0.8rem 0 1.5rem 0;
-      color: #cfd9ff;
-    }
-    .view-works-btn {
-      background: transparent;
-      border: 2px solid white;
-      color: white;
-      padding: 0.9rem 2.8rem;
-      border-radius: 50px;
-      font-size: 1.2rem;
-      font-weight: 600;
-      backdrop-filter: blur(10px);
-      cursor: default;
-      transition: 0.25s;
-      box-shadow: 0 0 20px rgba(255,255,255,0.2);
-      display: inline-block;
-    }
-    .view-works-btn:hover {
-      background: white;
-      color: #0b0b1f;
-      border-color: white;
-    }
-
-    /* right side – photo card (from wr.png "JONY." + photo) */
-    .photo-card {
-      pointer-events: auto;
-      position: absolute;
-      bottom: 3rem;
-      right: 3rem;
-      width: 260px;
-      background: rgba(20, 20, 35, 0.5);
-      backdrop-filter: blur(12px);
-      border-radius: 40px;
-      padding: 1.8rem 1.8rem 2rem 1.8rem;
-      border: 1px solid rgba(255,255,255,0.25);
-      box-shadow: 0 30px 50px rgba(0,0,0,0.6);
-      text-align: center;
-      animation: float 6s infinite ease-in-out;
-    }
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-12px); }
-      100% { transform: translateY(0px); }
-    }
-
-    .photo-name {
-      font-size: 3.5rem;
-      font-weight: 800;
-      line-height: 1;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(135deg, #fff8, #ffffff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 30px #7aa6ff;
-      letter-spacing: 2px;
-    }
-
-    .photo-img {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid rgba(255,255,255,0.5);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-      margin: 1rem auto 0.8rem;
-      background: #2a2a4a; /* fallback */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4rem; /* icon fallback if image missing */
-      color: #c0c0ff;
-    }
-    /* simulate a person icon – but we'll try to display actual image from resume if possible. Since we don't have actual photo, use fontawesome user-astronaut as placeholder – but style to feel like a person */
-    .photo-img img {
-      display: none; /* we use background color + icon, because no actual file – but to stay true to "photo", I'll use an astronaut as cool placeholder – you can replace url later */
-    }
-    /* BUT i'll add an actual 'photo' feeling using a canvas element? No, I'll put a nice generative person-like shape using fontawesome icon in a circle – it's abstract but fits 3D vibe */
-    .photo-img i {
-      font-size: 5rem;
-      filter: drop-shadow(0 4px 8px black);
-    }
-
-    .photo-caption {
-      font-size: 1.2rem;
-      font-weight: 300;
-      color: #dbdbff;
-      margin-top: 0.8rem;
-      border-top: 1px solid rgba(255,255,255,0.2);
-      padding-top: 0.8rem;
-    }
-    .photo-caption i {
-      margin: 0 4px;
-      color: #ffd966;
-    }
-
-    /* resume highlights bottom center (optional) */
-    .mini-resume {
-      pointer-events: auto;
-      position: absolute;
-      bottom: 1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0,0,0,0.3);
-      backdrop-filter: blur(8px);
-      padding: 0.6rem 1.8rem;
-      border-radius: 60px;
-      font-size: 0.95rem;
-      border: 1px solid rgba(255,255,255,0.1);
-      white-space: nowrap;
-      display: flex;
-      gap: 2rem;
-      color: #ccc;
-    }
-    .mini-resume span i {
-      margin-right: 6px;
-      color: #80b4ff;
-    }
-
-    /* canvas 3D container */
-    #canvas-container {
-      width: 100vw;
-      height: 100vh;
-      display: block;
-    }
-  </style>
+        @media (max-width: 700px) {
+            header {
+                flex-direction: column;
+                gap: 1.5rem;
+                align-items: flex-start;
+            }
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .avatar {
+                width: 110px;
+                height: 110px;
+                font-size: 3rem;
+            }
+            .tagline span {
+                font-size: 0.9rem;
+                padding: 4px 12px;
+            }
+        }
+        @media (max-width: 450px) {
+            .nav-links {
+                gap: 1rem;
+            }
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div id="canvas-container"></div>
+    <div id="three-container"></div>
 
-  <!-- UI Overlay – exactly matches wr.png structure plus resume info -->
-  <div class="ui-overlay">
-    <!-- top navigation -->
-    <div style="display: flex; justify-content: center; width: 100%;">
-      <div class="nav-bar">
-        <div class="nav-links">
-          <span>Home</span>
-          <span>Works</span>
-          <span>Services</span>
-          <span>Pages</span>
-          <span>About</span>
-          <span>Blog</span>
-          <span>Contact</span>
+    <div class="content">
+        <div class="wrapper">
+            <header>
+                <div class="logo">
+                    <h1>BITTU KUMAR <span style="font-weight:300;">(RAJ)</span></h1>
+                    <div class="sub">
+                        <span><i class="fas fa-microchip"></i> CSE</span>
+                        <span><i class="fas fa-trophy"></i> GATE 2025</span>
+                        <span><i class="fas fa-chalkboard-teacher"></i> STET 2025</span>
+                    </div>
+                </div>
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#projects">Projects</a>
+                </div>
+            </header>
+
+            <div class="hero">
+
+                <!-- ===== PHOTO ADDED HERE ===== -->
+                <div class="hero-photo">
+                    <img src="bk.jpeg" alt="Bittu Kumar (Raj)">
+                </div>
+                <!-- ============================ -->
+
+                <div class="avatar">BR</div>
+                <h2>Bittu Kumar (Raj)</h2>
+                <div class="tagline">
+                    <span><i class="fas fa-laptop-code"></i> Computer Science Engineer</span>
+                    <span><i class="fas fa-calendar-check"></i> GATE 2025 · STET 2025</span>
+                </div>
+                <div class="social-icons">
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LeetCode"><i class="fas fa-code"></i></a>
+                </div>
+                <a href="#contact" class="cta-button"><i class="fas fa-paper-plane"></i> Connect with me</a>
+            </div>
+
+            <section id="about">
+                <div class="section-title">
+                    <i class="fas fa-user-astronaut"></i> About Me
+                </div>
+                <div class="about-text">
+                    <p>I'm <span class="highlight">Bittu Kumar (Raj)</span>, a passionate Computer Science engineer with a strong foundation in algorithms, data structures, and system design. I'm currently preparing for <span class="highlight">GATE 2025</span> and <span class="highlight">STET 2025</span>, aiming to push my limits in both technical and academic domains.</p>
+                    <p>I love solving complex problems, building scalable applications, and exploring the latest in AI and web technologies. My goal is to contribute to impactful projects and share knowledge with the community.</p>
+                    <p><i class="fas fa-map-pin" style="color:#7f9eff; width:20px;"></i> Based in India · Open to collaborations and opportunities.</p>
+                </div>
+            </section>
+
+            <section id="skills">
+                <div class="section-title">
+                    <i class="fas fa-cogs"></i> Technical Skills
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-item"><i class="fab fa-python"></i> Python</div>
+                    <div class="skill-item"><i class="fab fa-java"></i> Java</div>
+                    <div class="skill-item"><i class="fas fa-code"></i> C++</div>
+                    <div class="skill-item"><i class="fab fa-js"></i> JavaScript</div>
+                    <div class="skill-item"><i class="fab fa-react"></i> React</div>
+                    <div class="skill-item"><i class="fas fa-database"></i> SQL / DBMS</div>
+                    <div class="skill-item"><i class="fas fa-network-wired"></i> Computer Networks</div>
+                    <div class="skill-item"><i class="fas fa-sitemap"></i> DSA / OS</div>
+                </div>
+            </section>
+
+            <section id="projects">
+                <div class="section-title">
+                    <i class="fas fa-rocket"></i> Projects
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <i class="fas fa-brain"></i>
+                        <h3>GATE Prep Tracker</h3>
+                        <p>A full-stack web app to track syllabus completion, mock tests, and revision schedules for GATE aspirants. Features progress analytics and reminders.</p>
+                        <div>
+                            <span class="project-tag">React</span>
+                            <span class="project-tag">Node.js</span>
+                            <span class="project-tag">MongoDB</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>AlgoViz</h3>
+                        <p>Interactive algorithm visualizer that demonstrates sorting, pathfinding, and graph algorithms with real-time animation and complexity analysis.</p>
+                        <div>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">D3.js</span>
+                            <span class="project-tag">HTML/CSS</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>STET Quiz Portal</h3>
+                        <p>An online examination portal with timed quizzes, instant results, and performance insights tailored for STET candidates. Includes admin dashboard.</p>
+                        <div>
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">Flask</span>
+                            <span class="project-tag">SQLite</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer>
+                <p>© 2025 Bittu Kumar (Raj) · CSE · GATE 2025 · STET 2025</p>
+                <p style="margin-top: 8px; font-size: 0.85rem;">Built with <i class="fas fa-heart"></i> and Three.js</p>
+            </footer>
         </div>
-        <div class="lets-talk">Let's Talk</div>
-      </div>
     </div>
 
-    <!-- left hero (exactly "Hi There, I Am Jony  Creative Director  View Works") -->
-    <div class="hero-section">
-      <div class="hero-greeting">
-        Hi There, I Am Jony
-        <small>based in India</small>
-      </div>
-      <div class="hero-title">Creative Director & Software Engineer</div>
-      <div class="view-works-btn">View Works</div>
-    </div>
+    <script>
+        (function() {
+            // --- Three.js background: particles + rotating geometry ---
+            const container = document.getElementById('three-container');
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x0a0a16);
 
-    <!-- right photo card with name JONY. and photo placeholder + resume bits -->
-    <div class="photo-card">
-      <div class="photo-name">JONY.</div>
-      <!-- photo representation: using an icon that suggests a person, as we don't have actual photo. In real scenario you'd place <img src='myphoto.jpg'> -->
-      <div class="photo-img">
-        <i class="fas fa-user-astronaut"></i>
-        <!-- you can replace the above with <img src="your-photo.jpg" style="width:100%; height:100%; border-radius:50%; display:block;"> once you have a file named 'profile.jpg' in same folder -->
-      </div>
-      <div class="photo-caption">
-        <i class="fas fa-map-pin"></i> CS grad '24 · GATE 2025 <br>
-        <span style="font-size:1rem;">AWS · ML · C++</span>
-      </div>
-    </div>
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 30;
 
-    <!-- tiny resume bar with key facts from the PDF -->
-    <div class="mini-resume">
-      <span><i class="fas fa-graduation-cap"></i> Galgotias Univ 71.6% (2024)</span>
-      <span><i class="fas fa-code"></i> WhatsApp Analyzer 94% acc</span>
-      <span><i class="fas fa-cloud"></i> AWS AICTE intern</span>
-      <span><i class="fas fa-trophy"></i> GATE 2025 · STET 2025</span>
-    </div>
-  </div>
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
 
-  <!-- Three.js libraries -->
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
-      }
-    }
-  </script>
+            // --- particles (starfield) ---
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 1800;
+            const posArray = new Float32Array(particlesCount * 3);
 
-  <script type="module">
-    import * as THREE from 'three';
-    import { OrbitControls } from 'https://unpkg.com/three@0.128.0/examples/jsm/controls/OrbitControls.js';
+            for (let i = 0; i < particlesCount * 3; i += 3) {
+                const radius = 40 + Math.random() * 40;
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.acos((Math.random() * 2) - 1);
+                posArray[i] = Math.sin(phi) * Math.cos(theta) * radius;
+                posArray[i+1] = Math.sin(phi) * Math.sin(theta) * radius;
+                posArray[i+2] = Math.cos(phi) * radius;
+            }
 
-    // --- setup scene, camera, renderer ---
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x0b0b1f); // deep navy
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
 
-    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(5, 3, 12);
-    
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.shadowMap.enabled = true; // not heavily used but adds depth
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    renderer.setPixelRatio(window.devicePixelRatio);
-    document.getElementById('canvas-container').appendChild(renderer.domElement);
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.25,
+                color: 0x88aaff,
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending,
+                sizeAttenuation: true,
+            });
 
-    // controls – allow user to rotate around, but autoRotate to show 3D
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
-    controls.autoRotate = true;
-    controls.autoRotateSpeed = 1.5;
-    controls.enableZoom = true;
-    controls.enablePan = false;
-    controls.maxPolarAngle = Math.PI / 2; // keep below horizon
-    controls.target.set(0, 1.5, 0);
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
 
-    // --- LIGHTS ---
-    const ambientLight = new THREE.AmbientLight(0x404060);
-    scene.add(ambientLight);
+            // --- central wireframe icosahedron + inner sphere ---
+            const geometry = new THREE.IcosahedronGeometry(8, 1);
+            const material = new THREE.MeshBasicMaterial({
+                color: 0x5a7ad0,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.35
+            });
+            const icosahedron = new THREE.Mesh(geometry, material);
+            scene.add(icosahedron);
 
-    const dirLight = new THREE.DirectionalLight(0xffeedd, 1);
-    dirLight.position.set(2, 5, 5);
-    dirLight.castShadow = true;
-    dirLight.receiveShadow = true;
-    scene.add(dirLight);
+            const innerSphereGeo = new THREE.SphereGeometry(2.5, 32, 32);
+            const innerSphereMat = new THREE.MeshStandardMaterial({
+                color: 0x3a5fb0,
+                emissive: 0x1a2f6a,
+                roughness: 0.3,
+                metalness: 0.1,
+                transparent: true,
+                opacity: 0.4
+            });
+            const innerSphere = new THREE.Mesh(innerSphereGeo, innerSphereMat);
+            scene.add(innerSphere);
 
-    const fillLight = new THREE.PointLight(0x4466ff, 0.5);
-    fillLight.position.set(-3, 2, 4);
-    scene.add(fillLight);
+            const ringGeo = new THREE.TorusKnotGeometry(5, 1.2, 64, 8, 2, 3);
+            const ringMat = new THREE.MeshBasicMaterial({
+                color: 0x6c8cff,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.15
+            });
+            const ring = new THREE.Mesh(ringGeo, ringMat);
+            ring.rotation.x = Math.PI / 4;
+            ring.rotation.y = Math.PI / 6;
+            scene.add(ring);
 
-    // back rim light
-    const backLight = new THREE.PointLight(0x77aaff, 0.6);
-    backLight.position.set(0, 3, -8);
-    scene.add(backLight);
+            const ambientLight = new THREE.AmbientLight(0x404060);
+            scene.add(ambientLight);
+            const pointLight = new THREE.PointLight(0x6c8cff, 1, 50);
+            pointLight.position.set(10, 10, 20);
+            scene.add(pointLight);
 
-    // --- 3D objects that represent resume items / skills / projects ---
-    
-    // 1. Central pedestal / stage (abstract shape)
-    const stageGeo = new THREE.CylinderGeometry(3.5, 3.5, 0.4, 64);
-    const stageMat = new THREE.MeshStandardMaterial({ color: 0x2a2a4a, emissive: 0x111125, roughness: 0.4, metalness: 0.1 });
-    const stage = new THREE.Mesh(stageGeo, stageMat);
-    stage.position.set(0, -0.2, 0);
-    stage.receiveShadow = true;
-    stage.castShadow = true;
-    scene.add(stage);
+            let clock = new THREE.Clock();
 
-    // 2. Floating "resume blocks" – each representing education, projects, skills
-    function createResumeBlock(color, pos, scale, textTag) {
-      const geom = new THREE.BoxGeometry(1.2, 0.5, 0.8);
-      const mat = new THREE.MeshStandardMaterial({ color: color, emissive: 0x221133, transparent: true, opacity: 0.9 });
-      const block = new THREE.Mesh(geom, mat);
-      block.position.set(pos.x, pos.y, pos.z);
-      block.scale.set(scale.x, scale.y, scale.z);
-      block.castShadow = true;
-      block.receiveShadow = true;
-      
-      // add wireframe for techy look
-      const edges = new THREE.EdgesGeometry(geom);
-      const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0xaaccff }));
-      block.add(line);
-      
-      // tiny icon inside? we'll just attach a small sphere or star as label
-      return block;
-    }
+            function animate() {
+                const elapsedTime = clock.getElapsedTime();
 
-    // education block
-    const eduBlock = createResumeBlock(0x4a6fa5, { x: -1.8, y: 0.5, z: 1.2 }, { x: 1, y: 1, z: 1 });
-    scene.add(eduBlock);
-    // project block (WhatsApp analyzer)
-    const projBlock = createResumeBlock(0x9f5f80, { x: 1.6, y: 0.8, z: -1.4 }, { x: 1.2, y: 0.6, z: 1 });
-    scene.add(projBlock);
-    // certification block (AWS, Cisco)
-    const certBlock = createResumeBlock(0x3f7e6b, { x: 0.2, y: 0.2, z: 2.0 }, { x: 1, y: 0.5, z: 0.8 });
-    scene.add(certBlock);
+                particlesMesh.rotation.y = elapsedTime * 0.02;
+                particlesMesh.rotation.x = Math.sin(elapsedTime * 0.1) * 0.05;
 
-    // 3. Floating orbs with micro icons (represent skills: C++, ML, cloud)
-    const sphereMat = new THREE.MeshStandardMaterial({ color: 0xffaa55, emissive: 0x442200 });
-    const skillPositions = [
-      { x: -2.0, y: 1.2, z: -1.0, color: 0xff6666 }, // C++
-      { x: 2.2, y: 1.4, z: 0.8, color: 0x66ccff },   // ML
-      { x: -0.5, y: 1.6, z: -1.9, color: 0x88dd88 }, // cloud
-      { x: 1.2, y: 0.9, z: 1.8, color: 0xbb88ff },   // networking
-    ];
-    skillPositions.forEach((pos) => {
-      const geom = new THREE.SphereGeometry(0.35, 32, 32);
-      const mat = new THREE.MeshStandardMaterial({ color: pos.color, emissive: 0x332233, roughness: 0.2 });
-      const sphere = new THREE.Mesh(geom, mat);
-      sphere.position.set(pos.x, pos.y, pos.z);
-      sphere.castShadow = true;
-      sphere.receiveShadow = true;
-      scene.add(sphere);
-      
-      // tiny ring around
-      const ringGeo = new THREE.TorusGeometry(0.45, 0.03, 16, 100);
-      const ringMat = new THREE.MeshStandardMaterial({ color: 0xddeeff, emissive: 0x114477 });
-      const ring = new THREE.Mesh(ringGeo, ringMat);
-      ring.rotation.x = Math.PI/2;
-      ring.rotation.z = 0.3;
-      ring.position.set(pos.x, pos.y, pos.z);
-      scene.add(ring);
-    });
+                icosahedron.rotation.x = elapsedTime * 0.08;
+                icosahedron.rotation.y = elapsedTime * 0.12;
+                innerSphere.rotation.x = elapsedTime * 0.05;
+                innerSphere.rotation.y = elapsedTime * 0.07;
 
-    // 4. Floating tiny cubes with letters? (just for vibe)
-    for (let i = 0; i < 12; i++) {
-      const size = 0.1 + Math.random()*0.15;
-      const geom = new THREE.BoxGeometry(size, size, size);
-      const mat = new THREE.MeshStandardMaterial({ color: Math.random() * 0x808080 + 0x808080, emissive: 0x111122 });
-      const cube = new THREE.Mesh(geom, mat);
-      const angle = (i / 12) * Math.PI * 2;
-      const radius = 2.8;
-      cube.position.set(
-        Math.cos(angle)*radius,
-        0.4 + Math.sin(i*2)*0.5,
-        Math.sin(angle)*radius
-      );
-      cube.castShadow = true;
-      scene.add(cube);
-    }
+                ring.rotation.x = Math.PI / 4 + elapsedTime * 0.05;
+                ring.rotation.y = Math.PI / 6 + elapsedTime * 0.08;
+                ring.rotation.z = elapsedTime * 0.03;
 
-    // 5. A "book" or "document" shape (represents PDF resume)
-    const bookGroup = new THREE.Group();
-    const bookCover = new THREE.BoxGeometry(1.6, 0.1, 2.2);
-    const coverMat = new THREE.MeshStandardMaterial({ color: 0xcf9f4a });
-    const cover = new THREE.Mesh(bookCover, coverMat);
-    cover.position.y = 0.05;
-    cover.castShadow = true;
-    cover.receiveShadow = true;
-    bookGroup.add(cover);
-    
-    const pages = new THREE.BoxGeometry(1.5, 0.15, 2.1);
-    const pagesMat = new THREE.MeshStandardMaterial({ color: 0xeeeeee });
-    const pageMesh = new THREE.Mesh(pages, pagesMat);
-    pageMesh.position.y = 0.12;
-    pageMesh.castShadow = true;
-    bookGroup.add(pageMesh);
-    
-    bookGroup.position.set(-0.8, 0.35, -1.7);
-    bookGroup.rotation.y = 0.5;
-    scene.add(bookGroup);
+                camera.position.x = Math.sin(elapsedTime * 0.1) * 2;
+                camera.position.y = Math.cos(elapsedTime * 0.15) * 1.5;
+                camera.lookAt(scene.position);
 
-    // 6. Some floating stars or particles
-    const starsGeometry = new THREE.BufferGeometry();
-    const starsCount = 400;
-    const starsPositions = new Float32Array(starsCount * 3);
-    for (let i = 0; i < starsCount * 3; i += 3) {
-      starsPositions[i] = (Math.random() - 0.5) * 30;
-      starsPositions[i+1] = (Math.random() - 0.5) * 20;
-      starsPositions[i+2] = (Math.random() - 0.5) * 30 - 10; // spread behind and front
-    }
-    starsGeometry.setAttribute('position', new THREE.BufferAttribute(starsPositions, 3));
-    const starsMaterial = new THREE.PointsMaterial({ color: 0xaaccff, size: 0.08, transparent: true, opacity: 0.7 });
-    const stars = new THREE.Points(starsGeometry, starsMaterial);
-    scene.add(stars);
+                renderer.render(scene, camera);
+                requestAnimationFrame(animate);
+            }
 
-    // 7. ground reflection / subtle grid
-    const gridHelper = new THREE.GridHelper(20, 20, 0x77aaff, 0x334466);
-    gridHelper.position.y = -0.3;
-    scene.add(gridHelper);
+            animate();
 
-    // additional abstract rings surrounding
-    const ringGeoBig = new THREE.TorusGeometry(4.0, 0.08, 16, 100);
-    const ringMatBig = new THREE.MeshStandardMaterial({ color: 0x88aadd, emissive: 0x112244 });
-    const bigRing = new THREE.Mesh(ringGeoBig, ringMatBig);
-    bigRing.rotation.x = Math.PI / 2;
-    bigRing.rotation.z = 0.2;
-    bigRing.position.y = 1.2;
-    scene.add(bigRing);
-
-    const ringGeoSmall = new THREE.TorusGeometry(2.5, 0.05, 16, 80);
-    const ringMatSmall = new THREE.MeshStandardMaterial({ color: 0xffaa88, emissive: 0x331100 });
-    const smallRing = new THREE.Mesh(ringGeoSmall, ringMatSmall);
-    smallRing.rotation.x = Math.PI / 2 + 0.2;
-    smallRing.rotation.z = -0.3;
-    smallRing.position.y = 1.6;
-    scene.add(smallRing);
-
-    // --- animation loop ---
-    function animate() {
-      requestAnimationFrame(animate);
-
-      // subtle floating animations for some objects
-      const time = Date.now() * 0.001;
-      eduBlock.rotation.y += 0.002;
-      projBlock.rotation.x += 0.003;
-      certBlock.rotation.z += 0.001;
-      bigRing.rotation.y += 0.001;
-      smallRing.rotation.y -= 0.0015;
-      stars.rotation.y += 0.0002;
-
-      controls.update(); // for auto-rotate
-
-      renderer.render(scene, camera);
-    }
-
-    animate();
-
-    // resize handler
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-  </script>
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            });
+        })();
+    </script>
 </body>
 </html>
